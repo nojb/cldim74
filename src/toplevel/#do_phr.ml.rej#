@@ -1,0 +1,48 @@
+***************
+*** 14,25 ****
+  #open "format";;
+  #open "symtable";;
+  #open "load_phr";;
+  #open "dimdecl";;
+  #open "compiler";;
+  
+  (* Executing phrases *)
+  
+  let do_toplevel_phrase phr =
+    reset_type_expression_vars ();
+    dimen__reset_dim_expression_vars ();
+    begin match phr.im_desc with
+      Zexpr expr ->
+        let ty =
+--- 15,28 ----
+  #open "format";;
+  #open "symtable";;
+  #open "load_phr";;
++ #open "dimdecl";;
+  #open "compiler";;
+  
+  (* Executing phrases *)
+  
+  let do_toplevel_phrase phr =
+    reset_type_expression_vars ();
++   dimen__reset_dim_expression_vars ();
+    begin match phr.im_desc with
+      Zexpr expr ->
+        let ty =
+***************
+*** 60,66 ****
+    | Ztypedef decl ->
+        let _ = type_typedecl phr.im_loc decl in
+        do_list
+!         (fun (name, _, _) -> printf__printf "Type %s defined.\n" name)
+          decl
+    | Zexcdef decl ->
+        let _ = type_excdecl phr.im_loc decl in
+--- 63,69 ----
+    | Ztypedef decl ->
+        let _ = type_typedecl phr.im_loc decl in
+        do_list
+!         (fun (name, _, _, _) -> printf__printf "Type %s defined.\n" name)
+          decl
+    | Zexcdef decl ->
+        let _ = type_excdecl phr.im_loc decl in
